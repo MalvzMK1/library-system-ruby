@@ -1,10 +1,13 @@
 require_relative 'models/library'
+require_relative 'models/book'
+require_relative 'repositories/repository'
+require_relative 'controller/application_controller'
 
 def main
-  library = Library.new('Livraria do Seu Zé')
-  while true
-    # Library management system will come here...
-  end
+  controller = Controller.new
+
+  puts controller.add_book(Book.new('Livro', 256, 4.5, 1))
+  puts controller.add_book('')
 end
 
 main
