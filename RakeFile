@@ -1,0 +1,7 @@
+# Rakefile
+
+task :test do 
+  puts "\nStarting tests!🚀\n"
+  system('ruby -I -v app/test/repository_test.rb')
+end
+  
