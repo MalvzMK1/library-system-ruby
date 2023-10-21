@@ -6,7 +6,7 @@ class Repository
   end
 
   def find_book_index_by_id(book_id)
-    index = @@books.index { |book| book.get_infos[:id] == book_id }
+    index = @@books.index { |book| book.get_infos[:id] == book_id } || -1
     return index
   end
 
@@ -15,7 +15,13 @@ class Repository
   end
 
   def get_book_by_id(book_id)
-    return @@books[find_book_index_by_id(book_id)]
+    book_index = find_book_index_by_id(book_id)
+
+    if book_index != -1
+      return @@books[book_index]
+    else
+      return nil
+    end
   end
 
   def add_book(book)
