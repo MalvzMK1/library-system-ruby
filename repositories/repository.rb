@@ -23,7 +23,7 @@ class Repository
     return @@books
   end
 
-  def remove_book(book_id)
+  def delete_book(book_id)
     index = find_book_index_by_id(book_id)
 
     if index > -1
@@ -32,7 +32,9 @@ class Repository
     end
   end
 
-  def update_book(book_id)
+  def update_book(book_id, new_book_infos)
     index = @@books.find_index(book)
+    @@books[index] = new_book_infos
+    return @@books
   end
 end
