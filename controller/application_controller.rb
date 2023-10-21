@@ -18,12 +18,23 @@ class Controller
     end
   end
 
-  def getAllBooks
+  def get_all_books
     return @@books
   end
 
-  def deleteBook(bookId)
-    
+  def delete_book(book_id)
+    if book_id.class == Integer
+      return {
+        :data => @@repository.delete_book(),
+        :message => 'Book deleted successefully!',
+        :status => 200
+      }
+    else 
+      return {
+        :message => 'The provided ID is invalid, should be a number.',
+        :status => 400
+      }
+    end
   end
 
   def get_books_by_name(book_name)
