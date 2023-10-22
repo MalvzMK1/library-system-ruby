@@ -9,6 +9,9 @@ class LocalBookTestRepository < Repository
 end
 
 class LocalBook < Book
+  def reset_id_count
+    @@available_id = 1
+  end
 end
 
 class BookTest < Minitest::Test
@@ -18,6 +21,7 @@ class BookTest < Minitest::Test
 
   def teardown
     @repository.clear_books
+    LocalBook.new('', 0).reset_id_count
   end
 
   def test_id_auto_gen

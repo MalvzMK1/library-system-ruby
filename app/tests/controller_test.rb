@@ -9,6 +9,9 @@ class LocalControllerTestRepository < Repository
 end
 
 class LocalBook < Book
+  def reset_id_count
+    @@available_id = 1
+  end
 end
 
 class ControllerTest < Minitest::Test
@@ -18,6 +21,7 @@ class ControllerTest < Minitest::Test
 
   def teardown
     @repository.clear_books
+    LocalBook.new('', 0).reset_id_count # reseting book available id to avoid data interferece
   end
 
   def test_create_book
