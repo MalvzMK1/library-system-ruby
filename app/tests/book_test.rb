@@ -9,9 +9,11 @@ class LocalBookTestRepository < Repository
 end
 
 class LocalBook < Book
+  # :nocov:
   def reset_id_count
     @@available_id = 1
   end
+  # :nocov:
 end
 
 class BookTest < Minitest::Test
