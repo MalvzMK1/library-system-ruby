@@ -86,4 +86,25 @@ class RepositoryTest < Minitest::Test
       assert_equal LocalBook, book.class
     end
   end
+
+  def test_update_book
+    book = LocalBook.new('Book One', 200)
+
+    @repository.add_book(book)
+    before_update_book = book.get_infos
+
+    assert_equal book.get_infos, before_update_book
+    assert_equal 1, book.get_infos[:id]
+
+    updated_book = LocalBook.new('Updated Book', 123)
+
+    assert_equal book, @repository.update_book(1, updated_book)
+    after_update_book = @repository.get_book_by_id(1)
+    after_update_book = after_update_book.get_infos
+
+    refute_nil after_update_book
+    refute_equal before_update_book, after_update_book
+    assert_equal 'Updated Book', after_update_book[:name]
+    assert_equal before_update_book[:id], after_update_book[:id]
+  end
 end
