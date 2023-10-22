@@ -50,4 +50,15 @@ class BookTest < Minitest::Test
     assert_equal 1, bookOne.get_infos[:id]
     assert_equal 2, bookTwo.get_infos[:id]
   end
+
+  def test_update_book
+    book = LocalBook.new('Book One', 200)
+
+    assert_equal 200, book.get_infos[:pages]
+    
+    book.update_infos(book.get_infos[:name], 123)
+
+    assert_equal 'Book One', book.get_infos[:name]
+    refute_equal 200, book.get_infos[:pages]
+  end
 end
