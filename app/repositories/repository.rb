@@ -1,10 +1,6 @@
 class Repository
   @@books = []
 
-  def initialize
-    puts 'Repository initialized successefully!!!'
-  end
-
   def find_book_index_by_id(book_id)
     index = @@books.index { |book| book.get_infos[:id] == book_id } || -1
     return index

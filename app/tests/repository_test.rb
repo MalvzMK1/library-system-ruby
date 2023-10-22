@@ -38,14 +38,17 @@ class RepositoryTest < Minitest::Test
     assert_equal book, result.first
   end
 
-  # def test_delete_book
-  #   book = Book.new("Book One", 200, 4.5, 1)
-  #   @repository.add_book(book)
+  def test_delete_book
+    book = Book.new('Book One', 200, 4.5, 1)
 
-  #   result = @repository.delete_book(1)
+    @repository.add_book(book)
 
-  #   assert_equal 0, result.length
-  # end
+    result = @repository.delete_book(book.get_infos[:id])
+    
+    assert_equal Integer, book.get_infos[:id].class
+    assert_equal 0, result.length
+    refute_equal Book, @repository.get_book_by_id(book.get_infos[:id])
+  end
 
   # def test_get_book_by_id
   #   book1 = Book.new("Book One", 200, 4.5, 1)
