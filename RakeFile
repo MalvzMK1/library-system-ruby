@@ -2,6 +2,6 @@
 
 task :test do 
   puts "\nStarting tests!🚀\n"
-  system('ruby -I -v app/tests/repository_test.rb')
+  system('ruby -I -v app/tests/consolidated_tests.rb')
 end
   
