@@ -1,15 +1,15 @@
 class Book
-  @@last_id = 1
+  @@available_id = 1
 
   def initialize(name, pages, rating = 0)
     @infos = {
-      :id => @@last_id,
+      :id => @@available_id,
       :name => name,
       :pages => pages,
       :rating => rating,
     }
 
-    @@last_id += 1
+    @@available_id += 1
   end
 
   def get_infos
