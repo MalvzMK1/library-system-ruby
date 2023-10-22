@@ -73,3 +73,16 @@
       end
     end
 ##### `context` is used to create a test context inside the describe block to `group tests` with common contexts
+---
+### Code Coverage
+#### In this project, I also used simplecov gem for code coverage study
+    require 'simplecov'
+
+    SimpleCov.start do
+      add_group 'Tests', 'app/tests'
+      add_group 'Controllers', 'app/controllers'
+      add_group 'Models', 'app/models'
+      add_group 'Repositories', 'app/repositories'
+      add_group 'Entry Point', 'app/main'
+    end
+#### Needs to be initialized before every test
