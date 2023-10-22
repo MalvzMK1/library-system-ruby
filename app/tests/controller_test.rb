@@ -27,6 +27,6 @@ class ControllerTest < Minitest::Test
   def test_create_book
     book = LocalBook.new('Book One', 200)
 
-    assert_equal LocalBook, book
+    assert_equal LocalBook, book.class
   end
 end
