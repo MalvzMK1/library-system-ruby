@@ -16,7 +16,7 @@ class Book
     return @infos
   end
 
-  def update_infos(name, pages, rating)
+  def update_infos(name = @infos[:name], pages = @infos[:pages], rating = @infos[:rating])
     @infos = {
       :id => @infos[:id],
       :name => name,
