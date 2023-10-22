@@ -1,17 +1,19 @@
 require 'minitest/autorun'
-require 'minitest/spec'
 require_relative '../models/book'
 require_relative '../repositories/repository'
 
-class LocalRepository < Repository
+class LocalRepositoryTestRepository < Repository
   def clear_books # Adding method to clear the @@books array
     @@books.clear
   end
 end
 
+class LocalBook < Book
+end
+
 class RepositoryTest < Minitest::Test
   def setup # this will run before every test
-    @repository = LocalRepository.new
+    @repository = LocalRepositoryTestRepository.new
   end
   
   def teardown # this will run after every test
@@ -19,8 +21,8 @@ class RepositoryTest < Minitest::Test
   end
 
   def test_find_book_index_by_id
-    book1 = Book.new("Book One", 200, 4.5, 1)
-    book2 = Book.new("Book Two", 250, 4.0, 2)
+    book1 = LocalBook.new("Book One", 200, 4.5)
+    book2 = LocalBook.new("Book Two", 250, 4.0)
 
     @repository.add_book(book1)
     @repository.add_book(book2)
@@ -31,7 +33,7 @@ class RepositoryTest < Minitest::Test
   end
 
   def test_add_book
-    book = Book.new("New Book", 150, 4.8, 3)
+    book = LocalBook.new("New Book", 150, 4.8)
     result = @repository.add_book(book)
 
     assert_equal 1, result.length
@@ -39,7 +41,7 @@ class RepositoryTest < Minitest::Test
   end
 
   def test_delete_book
-    book = Book.new('Book One', 200, 4.5, 1)
+    book = LocalBook.new('Book One', 200, 4.5)
 
     @repository.add_book(book)
 
@@ -47,27 +49,27 @@ class RepositoryTest < Minitest::Test
     
     assert_equal Integer, book.get_infos[:id].class
     assert_equal 0, result.length
-    refute_equal Book, @repository.get_book_by_id(book.get_infos[:id])
+    refute_equal LocalBook, @repository.get_book_by_id(book.get_infos[:id])
   end
 
   def test_get_book_by_id
-    book_one = Book.new('Book One', 200, 4.5, 1)
-    book_two = Book.new('Book Two', 250, 5, 2)
+    book_one = LocalBook.new('Book One', 200, 4.5)
+    book_two = LocalBook.new('Book Two', 250, 5)
 
     @repository.add_book(book_one)
     @repository.add_book(book_two)
 
     result = @repository.get_book_by_id(1)
 
-    assert_equal Book, result.class
+    assert_equal LocalBook, result.class
     assert_equal book_one.get_infos[:id], result.get_infos[:id]
     assert_equal book_one, result
   end
 
   def test_get_all_books
-    book_one = Book.new('Book One', 200, 4.5, 1)
-    book_two = Book.new('Book Two', 250, 5, 2)
-    book_three = Book.new('Book Three', 400, 3, 3)
+    book_one = LocalBook.new('Book One', 200, 4.5)
+    book_two = LocalBook.new('Book Two', 250, 5)
+    book_three = LocalBook.new('Book Three', 400, 3)
 
     @repository.add_book(book_one)
     @repository.add_book(book_two)
@@ -77,13 +79,7 @@ class RepositoryTest < Minitest::Test
 
     assert_equal 3, result.length
     for book in result
-      assert_equal Book, book.class
+      assert_equal LocalBook, book.class
     end
   end
-
-  describe 'My Class' do # Other way to do run tests
-    it 'Does something' do 
-      assert true
-    end
-  end 
 end
