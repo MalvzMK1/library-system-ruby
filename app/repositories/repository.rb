@@ -35,8 +35,14 @@ class Repository
   end
 
   def update_book(book_id, new_book_infos)
-    index = @@books.find_index(book)
-    @@books[index] = new_book_infos
-    return @@books
+    index = find_book_index_by_id(book_id)
+
+    @@books[index].update_infos(
+      new_book_infos.get_infos[:name], 
+      new_book_infos.get_infos[:pages], 
+      new_book_infos.get_infos[:rating]
+      )
+
+    return @@books[index]
   end
 end
