@@ -4,13 +4,13 @@ class Controller
   @@repository = Repository.new
 
   def add_book(book)
-    if (book.class != Book)
-      return {
+    if book.class != Book
+      {
         :message => 'Data should be a Book',
         :status => 400
       }
     else
-      return {
+      {
         :data => @@repository.add_book(book),
         :message => 'Created book successefully!!',
         :status => 201
@@ -19,18 +19,18 @@ class Controller
   end
 
   def get_all_books
-    return @@books
+    @@repository.get_all_books
   end
 
   def delete_book(book_id)
     if book_id.class == Integer
-      return {
-        :data => @@repository.delete_book(),
+      {
+        :data => @@repository.delete_book(book_id),
         :message => 'Book deleted successefully!',
         :status => 200
       }
-    else 
-      return {
+    else
+      {
         :message => 'The provided ID is invalid, should be a number.',
         :status => 400
       }
@@ -39,13 +39,14 @@ class Controller
 
   def get_books_by_name(book_name)
     @found_books = []
+    books = @@repository.get_all_books
 
-    for book in @@books
+    books.each { |book|
       if book.get_infos[:name].include?(book_name)
         @found_books.push(book.get_infos)
       end
-    end
+    }
 
-    return @found_books
+    @found_books
   end
 end
