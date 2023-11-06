@@ -1,4 +1,5 @@
 require_relative '../models/book'
+require_relative '../repositories/repository'
 
 class Controller
   @@repository = Repository.new

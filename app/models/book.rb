@@ -13,7 +13,7 @@ class Book
   end
 
   def get_infos
-    return @infos
+    @infos
   end
 
   def update_infos(name = @infos[:name], pages = @infos[:pages], rating = @infos[:rating])

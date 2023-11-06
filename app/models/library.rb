@@ -1,19 +1,18 @@
-require_relative '../repositories/repository'
+require_relative '../controller/application_controller'
 require_relative 'book'
 
 class Library
-  @@numberOfBooks = 0
-  @@books = []
+  @@controller = Controller.new
 
   def initialize(name)
     @name = name
   end
 
   def get_name
-    return @name
+    @name
   end
 
   def get_all_books
-    return @@repositories.getAllBooks
+    @@controller.get_all_books
   end
 end

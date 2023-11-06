@@ -7,6 +7,11 @@ class UserEntriesHandler
     book_name = gets.to_s
     puts "Insert book page amount: "
     book_pages = gets.to_i
+
+    if book_pages == 0
+      throw Exception.new 'Invalid pages amount'
+    end
+
     puts "Insert book's rating"
     book_rating = gets
 
@@ -17,10 +22,6 @@ class UserEntriesHandler
          else
            book_rating = book_rating.to_f
          end
-    end
-
-    if book_pages == 0
-      throw Exception.new('Invalid pages amount')
     end
 
     Book.new book_name, book_pages, book_rating.nil? ? (0) : book_rating
