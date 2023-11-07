@@ -43,8 +43,8 @@ class Controller
     books = @@repository.get_all_books
 
     books.each { |book|
-      if book.get_infos[:name].include?(book_name)
-        @found_books.push(book.get_infos)
+      if book.get_infos[:name].downcase.include? book_name.downcase
+        @found_books.push(book)
       end
     }
 
